@@ -101,21 +101,55 @@ contract NFTMarketTest is Test, IERC721Receiver {
         erc20.approve(address(mkt), price);
         nft.setApprovalForAll(address(mkt), true);
 
-        // 购买 NFT
+        // 购买 NFT （这里测试合约购买，测试合约调用购买方法）
         mkt.buyNFT(tokenId, price);
 
-        // 验证 NFT 所有权已转移
+        // 验证 NFT 所有权已转移   （这里测试合约购买）
         assertEq(
             nft.ownerOf(tokenId),
             address(this),
             "NFT ownership not transferred"
         );
 
-        // 验证 ERC20 代币余额减少
+        // 验证 ERC20 代币余额减少  （这里测试合约购买）
         assertEq(
             erc20.balanceOf(address(this)),
             5000 - price,
             "ERC20 balance not deducted correctly"
         );
+    }
+
+
+    // 测试事件
+    // ERC-20 标准的 Transfer 事件
+    event Transfer(address indexed from, address indexed to, uint256 value);
+    function test_TokenTransferEvent() public {
+        address bob = makeAddr("bob");
+
+        // 全部匹配
+        vm.expectEmit();
+        emit Transfer(alice, bob, 1000);
+        vm.prank(alice);
+        erc20.transfer(bob, 1000);
+
+        // 部分匹配
+        vm.expectEmit(true, true, false, false);
+        emit Transfer(alice, bob, 1000 * 2);
+        vm.prank(alice);
+        erc20.transfer(bob, 1000);
+
+
+        // 测试一次Call中的多个事件，只需要按事件顺序定义即可
+        // uint256 times = 10;
+
+        // for (uint256 i = 0; i < times; i++) {
+        //     vm.expectEmit();
+        //     emit Transfer(address(0), bob, 1000);
+        // }
+
+        // //假设有这个方法
+        // erc20.batchMint(bob, 1000, times);
+
+
     }
 }
