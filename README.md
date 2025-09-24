@@ -96,14 +96,14 @@ $ cast --help
 
     命令
     0x0f702ef8F8FC8Ea24c7D2e74c4bd45a3D18cBAE3（本地生成的用户的地址）
-    cast wallet new
-    cast wallet import -i s2admin (a123456)
+    cast wallet new  （创建一个钱包）
+    cast wallet import -i s2admin (a123456，保存到本地)
     cast wallet address --account s2admin （解压地址）
-    anvil
-    forge build
-    forge create --account s2admin MyERC20Token --broadcast
+    anvil      （启动本地区块链）
+    forge build  （编译合约） 
+    forge create --account s2admin MyERC20Token --broadcast     (部署合约)
     cast send -i --rpc-url 127.0.0.1:8545 --value 2ether 0x0f702ef8F8FC8Ea24c7D2e74c4bd45a3D18cBAE3 --from <你的地址>
-    cast balance 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --rpc-url 127.0.0.1:8545
+    cast balance 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --rpc-url 127.0.0.1:8545   （查看该地址的余额）
 
     <!-- 本地测试网 -->
     0xaaF460a552bb545340C1e686846fbD3D53fe9c5B （部署的合约）
@@ -121,6 +121,18 @@ $ cast --help
 
     cast balance --rpc-url https://1rpc.io/sepolia 0x0f702ef8F8FC8Ea24c7D2e74c4bd45a3D18cBAE3  （查看该地址的余额）
     forge create --account s2admin MyERC20Token --broadcast   (部署合约)
+    cast send 0xaaF460a552bb545340C1e686846fbD3D53fe9c5B "mint(address,uint256)" "0x0f702ef8F8FC8Ea24c7D2e74c4bd45a3D18cBAE3" 1000ether  (铸造币)
+    forge flatten ./src/998/MyERC20Token.sol    (扁平化合约代码，用于部署合约的合约验证)
+
+
+
+    forge v 0xaaF460a552bb545340C1e686846fbD3D53fe9c5B src/998/MyERC20Token.sol:MyERC20Token (MyERC20Token:MyERC20Token 文件名：合约名字， 发布验证合约，开源合约代码，这只一种更高级的方式。部署的时候我是省略了第二个MyERC20Token才部署成功，文件名，合约名一样的化可以省略第二个名字)
+    <!-- Response: `OK`
+        GUID: `dc1e64n4fsj5ue8rfasgyb7xiwnkc51qvq5wphrzmpjgichfui`
+        URL: https://sepolia.etherscan.io/address/0xaaf460a552bb545340c1e686846fbd3d53fe9c5b
+    -->
+    
+
 
 
 
