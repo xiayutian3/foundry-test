@@ -67,11 +67,11 @@ $ cast --help
 
 部署合约时需要做的事情
 
-部署命令
+1.部署命令
 
     使用 froge create 来部署合约。
 
-指定链包（身份验证方式）
+2.指定链包（身份验证方式）
 
     private key：直接使用私钥。
 
@@ -79,11 +79,11 @@ $ cast --help
 
     account：从默认文件夹中获取 Keystore，执行时输入密码。
 
-选择链
+3.选择链
 
     使用 --chain 参数指定目标链。
 
-选择 RPC 节点
+4.选择 RPC 节点
 
     https://chainlist.org
 
@@ -94,6 +94,21 @@ $ cast --help
     本地节点
 
 
+
+5.合约验证—应该的做法：
+
+    申请API key
+    forge v 合约地址 合约文件名：合约名称
+
+6.UI上验证：
+
+    forge flatten ./src/52Token.sol
+
+    copy 文件信息进行验证
+
+
+
+
     命令
     0x0f702ef8F8FC8Ea24c7D2e74c4bd45a3D18cBAE3（本地生成的用户的地址）
     cast wallet new  （创建一个钱包）
@@ -102,7 +117,8 @@ $ cast --help
     anvil      （启动本地区块链）
     forge build  （编译合约） 
     forge create --account s2admin MyERC20Token --broadcast     (部署合约)
-    cast send -i --rpc-url 127.0.0.1:8545 --value 2ether 0x0f702ef8F8FC8Ea24c7D2e74c4bd45a3D18cBAE3 --from <你的地址>
+    cast send -i --rpc-url 127.0.0.1:8545 --value 2ether 0x0f702ef8F8FC8Ea24c7D2e74c4bd45a3D18cBAE3 --from <你的地址>    (输入的是发送者的密钥)
+    cast send --rpc-url 127.0.0.1:8545 --value 2ether 0x0f702ef8F8FC8Ea24c7D2e74c4bd45a3D18cBAE3 --private-key <私钥>
     cast balance 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --rpc-url 127.0.0.1:8545   （查看该地址的余额）
 
     <!-- 本地测试网 -->
